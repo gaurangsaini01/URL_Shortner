@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+      .cpy {
+        border: 1px solid black;
+        padding: 2px 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>URL Shortner</h1>
+    <% if (locals.id) { %>
+    <div style="display: flex; gap: 10px">
+      <p>
+        Short URL is:
+        <span id="url">http://localhost:4000/url/<%=locals.id%></span>
+      </p>
+      <p class="cpy" onclick="copyToClipboard()">Copy To Clipboard</p>
+    </div>
+    <% } %>
+    <form action="/generateNewUrl" method="post">
+      <label for="originalUrl">Enter the URL to Shorten </label>
+      <input
+        autocomplete="off"
+        id="originalUrl"
+        type="text"
+        placeholder="http://example.com/"
+        name="originalUrl"
+      />
+      <button type="submit">Shorten</button>
+    </form>
+    <script>
+      function copyToClipboard() {
+        // Get the span element by ID
+        const spanElement = document.getElementById("url");
+
+        if (!spanElement) {
+          console.error("Element with ID 'url' not found.");
+          return;
+        }
+
+        // Create a temporary input element to copy the text
+        const tempInput = document.createElement("input");
+        tempInput.value = spanElement.textContent || spanElement.innerText;
+
+        // Add the input to the DOM, copy its value, and remove it
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        tempInput.setSelectionRange(0, 99999); // For mobile compatibility
+        document.execCommand("copy");
+
+        // Clean up
+        document.body.removeChild(tempInput);
+
+        // Provide feedback
+        alert("Text copied to clipboard: " + tempInput.value);
+      }
+    </script>
+  </body>
+</html>

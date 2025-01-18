@@ -17,11 +17,8 @@ async function generateNewShortUrl(req, res) {
       shortId,
       originalUrl,
     });
-
-    return res.status(200).json({
-      success: true,
-      message: "SHORT URL GENERATED",
-      data: shortId,
+    return res.render("Home", {
+      id: shortId,
     });
   } catch (err) {
     return res.status(500).json({
@@ -50,5 +47,8 @@ async function getoriginalsite(req, res) {
   await url.save();
   return res.status(301).redirect(url.originalUrl);
 }
-
-module.exports = { generateNewShortUrl, getoriginalsite };
+const HomePage = (req, res) => {
+  console.log("Hello");
+  return res.render("Home");
+};
+module.exports = { generateNewShortUrl, getoriginalsite, HomePage };
