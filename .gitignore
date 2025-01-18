@@ -1,0 +1,55 @@
+# Node.js dependencies
+/node_modules
+/npm-debug.log*
+/yarn-debug.log*
+/yarn-error.log*
+
+# Logs
+/logs
+*.log
+logs/**/*.log
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build and output directories
+/dist
+/build
+
+# Temporary files and caches
+/tmp
+/temp
+/cache
+/.next
+/.nuxt
+/out
+/.parcel-cache
+/.vercel
+/.netlify
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.swn
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# EJS-specific compiled or temp files (if any)
+*.ejs~
+
+# MongoDB (local database) files
+/data/db
+*.lock
+
+# Miscellaneous
+*.log
+debug.log
