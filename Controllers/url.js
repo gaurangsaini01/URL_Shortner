@@ -1,4 +1,4 @@
-const { nanoid } = require('nanoid-cjs');
+const { nanoid } = require("nanoid-cjs");
 const URL = require("../models/url");
 
 async function generateNewShortUrl(req, res) {
@@ -30,4 +30,25 @@ async function generateNewShortUrl(req, res) {
     });
   }
 }
-module.exports = { generateNewShortUrl };
+
+async function getoriginalsite(req, res) {
+  const shortId = req.params.id;
+  if (!shortId) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid Short Id",
+    });
+  }
+  const url = await URL.findOne({ shortId });
+  if (!url) {
+    return res.status(404).json({
+      success: false,
+      message: "Not Found",
+    });
+  }
+  url.totalVisits++;
+  await url.save();
+  return res.status(301).redirect(url.originalUrl);
+}
+
+module.exports = { generateNewShortUrl, getoriginalsite };

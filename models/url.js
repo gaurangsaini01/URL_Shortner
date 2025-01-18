@@ -9,10 +9,11 @@ const urlSchema = mongoose.Schema(
     originalUrl: {
       type: String,
       required: true,
-    }
-    // totalClicks: {
-    //   type: Number,
-    // },
+    },
+    totalVisits: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
